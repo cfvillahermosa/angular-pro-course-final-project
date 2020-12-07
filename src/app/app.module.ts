@@ -19,16 +19,3 @@ export const ROUTES: Routes = [];
   bootstrap: [AppComponent]
 })
 export class AppModule {}
-
-/*
- var firebaseConfig = {
-    apiKey: "AIzaSyAoGAisqpUsB713X_0_tBHBTuTBQtUIia0",
-    authDomain: "fitness-app-6280c.firebaseapp.com",
-    databaseURL: "https://fitness-app-6280c.firebaseio.com",
-    projectId: "fitness-app-6280c",
-    storageBucket: "fitness-app-6280c.appspot.com",
-    messagingSenderId: "310547498801",
-    appId: "1:310547498801:web:ac179239d24cc8fe2b5210",
-    measurementId: "G-TK43VS502R"
-  };
-*/
