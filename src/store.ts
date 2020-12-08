@@ -4,6 +4,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { User } from './auth/shared/services/auth/auth.service';
 import { Meal } from './health/shared/services/meals/meals.service';
+import { ScheduleItem } from './health/shared/services/schedule/schedule.service';
 import { Workout } from './health/shared/services/workouts/workouts.service';
 
 export interface State {
@@ -11,6 +12,7 @@ export interface State {
   meals: Meal[];
   date: Date;
   workouts: Workout[];
+  schedule: ScheduleItem[];
   [key: string]: any;
 }
 
@@ -18,7 +20,8 @@ const state: State = {
   user: undefined,
   meals: undefined,
   date: undefined,
-  workouts: undefined
+  workouts: undefined,
+  schedule: undefined
 };
 
 export class Store {
