@@ -20,7 +20,7 @@ import { Workout } from '../../../shared/services/workouts/workouts.service';
         <div class="workout-form__name">
           <label>
             <h3>Workout name</h3>
-            <input type="text" placeholder="e.g. English Breakfast" formControlName="name" />
+            <input type="text" [placeholder]="placeholder" formControlName="name" />
             <div class="error" *ngIf="required">
               Workout name is required
             </div>
@@ -29,6 +29,38 @@ import { Workout } from '../../../shared/services/workouts/workouts.service';
             <h3>Type</h3>
             <workout-type formControlName="type"></workout-type>
           </label>
+        </div>
+
+        <div class="workout-form__details">
+          <div *ngIf="form.get('type').value === 'strength'">
+            <div class="workout-form__fields" formGroupName="strength">
+              <label>
+                <h3>Reps</h3>
+                <input type="number" formControlName="reps" />
+              </label>
+              <label>
+                <h3>Sets</h3>
+                <input type="number" formControlName="sets" />
+              </label>
+              <label>
+                <h3>Weight <span>(Kg)</span></h3>
+                <input type="number" formControlName="weight" />
+              </label>
+            </div>
+          </div>
+
+          <div *ngIf="form.get('type').value === 'endurance'">
+            <div class="workout-form__fields" formGroupName="endurance">
+              <label>
+                <h3>Distance <span>(Km)</span></h3>
+                <input type="number" formControlName="distance" />
+              </label>
+              <label>
+                <h3>Duration <span>(minutes)</span></h3>
+                <input type="number" formControlName="duration" />
+              </label>
+            </div>
+          </div>
         </div>
 
         <div class="workout-form__submit">
@@ -80,46 +112,36 @@ export class WorkoutFormComponent implements OnChanges {
 
   form = this.fb.group({
     name: ['', Validators.required],
-    type: 'strength'
+    type: 'strength',
+    strength: this.fb.group({
+      reps: 0,
+      sets: 0,
+      weight: 0
+    }),
+    endurance: this.fb.group({
+      distance: 0,
+      duration: 0
+    })
   });
 
   constructor(private fb: FormBuilder) {}
 
-  ngOnChanges(changes: SimpleChanges) {
-    // if (this.meal && this.meal.name) {
-    //   this.exists = true;
-    //   this.emptyIngredients();
-    //   const value = this.meal;
-    //   this.form.patchValue(value);
-    //   if (value.ingredients) {
-    //     for (const item of value.ingredients) {
-    //       this.ingredients.push(new FormControl(item));
-    //     }
-    //   }
-    // }
+  get placeholder() {
+    return `
+    e.g. ${this.form.get('type').value === 'strength' ? 'Benchpress' : 'Treadmill'}`;
   }
 
-  // emptyIngredients() {
-  //   while(this.ingredients.controls.length) {
-  //     this.ingredients.removeAt(0);
-  //   }
-  // }
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.workout && this.workout.name) {
+      this.exists = true;
+      const value = this.workout;
+      this.form.patchValue(value);
+    }
+  }
 
   get required() {
     return this.form.get('name').hasError('required') && this.form.get('name').touched;
   }
-
-  // get ingredients() {
-  //   return this.form.get('ingredients') as FormArray;
-  // }
-
-  // addIngredient() {
-  //   this.ingredients.push(new FormControl(''));
-  // }
-
-  // removeIngredient(index: number) {
-  //   this.ingredients.removeAt(index);
-  // }
 
   createWorkout() {
     if (this.form.valid) {
