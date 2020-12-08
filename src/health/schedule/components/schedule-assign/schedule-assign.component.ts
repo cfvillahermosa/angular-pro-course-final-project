@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Meal } from './../../../shared/services/meals/meals.service';
-import { Workout } from './../../../shared/services/workouts/workouts.service';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+
+import { Meal } from '../../../shared/services/meals/meals.service';
+import { Workout } from '../../../shared/services/workouts/workouts.service';
 
 @Component({
   selector: 'schedule-assign',
@@ -28,11 +29,14 @@ import { Workout } from './../../../shared/services/workouts/workouts.service';
             {{ item.name }}
           </div>
         </div>
-
         <div class="schedule-assign__submit">
           <div>
-            <button type="button" class="button" (click)="updateAssign()">Update</button>
-            <button type="button" class="button button--cancel" (click)="cancelAssign()">Cancel</button>
+            <button type="button" class="button" (click)="updateAssign()">
+              Update
+            </button>
+            <button type="button" class="button button--cancel" (click)="cancelAssign()">
+              Cancel
+            </button>
           </div>
         </div>
       </div>

@@ -31,7 +31,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
           *ngIf="section.workouts; else addWorkout"
           (click)="onSelect('workouts', section.workouts)"
         >
-          <span>{{ section.meals | join }}</span>
+          <span>{{ section.workouts | join }}</span>
         </div>
 
         <ng-template #addWorkout>
