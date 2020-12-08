@@ -22,8 +22,7 @@ import { Meal, MealsService } from './../../../shared/services/meals/meals.servi
           No meals, add a new meal to start
         </div>
 
-        <list-item *ngFor="let meal of meals" [item]="meal"></list-item>
-
+        <list-item *ngFor="let meal of meals" [item]="meal" (remove)="removeMeal($event)"></list-item>
       </div>
       <ng-template #loading>
         <div class="message">
@@ -46,5 +45,9 @@ export class MealsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  removeMeal(event: Meal) {
+    this.mealsService.removeMeal(event.$key);
   }
 }
