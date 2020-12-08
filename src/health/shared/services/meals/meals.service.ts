@@ -21,7 +21,9 @@ export interface Meal {
 
 @Injectable()
 export class MealsService {
-  meals$: Observable<Meal[]> = this.db.list(`meals/${this.uid}`).do(next => this.store.set('meals', next));
+  meals$: Observable<Meal[]> = this.db
+    .list(`meals/${this.uid}`)
+    .do(next => this.store.set('meals', next)) as Observable<Meal[]>;
 
   constructor(private store: Store, private db: AngularFireDatabase, private authService: AuthService) {}
 
@@ -39,6 +41,10 @@ export class MealsService {
 
   addMeal(meal: Meal) {
     return this.db.list(`meals/${this.uid}`).push(meal);
+  }
+
+  updateMeal(key: string, meal: Meal) {
+    return this.db.object(`meals/${this.uid}/${key}`).update(meal);
   }
 
   removeMeal(key: string) {
