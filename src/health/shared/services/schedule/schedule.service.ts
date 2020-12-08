@@ -10,4 +10,8 @@ export class ScheduleService {
   shedule$: Observable<any[]> = this.date$.do((next: any) => this.store.set('date', next));
 
   constructor(private store: Store) {}
+
+  updateDate(date: Date) {
+    this.date$.next(date);
+  }
 }
