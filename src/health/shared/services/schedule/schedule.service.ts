@@ -1,0 +1,13 @@
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
+import { Store } from 'store';
+
+@Injectable()
+export class ScheduleService {
+  private date$ = new BehaviorSubject(new Date());
+
+  shedule$: Observable<any[]> = this.date$.do((next: any) => this.store.set('date', next));
+
+  constructor(private store: Store) {}
+}
