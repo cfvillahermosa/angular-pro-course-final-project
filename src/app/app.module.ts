@@ -11,11 +11,10 @@ import { AppNavComponent } from './components/app-nav/app-nav.component';
 // containers
 import { AppComponent } from './containers/app/app.component';
 
-
-
 // routes
 export const ROUTES: Routes = [
-  {path: '', pathMatch: 'full', redirectTo: 'schedule'}
+  { path: '', pathMatch: 'full', redirectTo: 'schedule' },
+  { path: '**', redirectTo: 'schedule' }
 ];
 
 @NgModule({
